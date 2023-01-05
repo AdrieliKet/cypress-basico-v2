@@ -17,7 +17,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#email').type('adrieli@gmail.com');
         cy.get('#phone').type('999999999');
         cy.get('#open-text-area').type(longText, {delay: 0});
-        cy.get('.button[type="submit"]').click();
+        cy.contains('.button', 'Enviar').click();
         cy.get('.success').should('be.visible');
     })
 
@@ -27,7 +27,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#email').type('adrieli.gmail.com');
         cy.get('#phone').type('999999999');
         cy.get('#open-text-area').type('Teste');
-        cy.get('.button[type="submit"]').click();
+        cy.contains('.button', 'Enviar').click();
         cy.get('.error').should('be.visible');
     })
 
@@ -41,7 +41,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#email').type('adrieli@gmail.com');
         cy.get('#phone-checkbox').click();
         cy.get('#open-text-area').type('Teste');
-        cy.get('.button[type="submit"]').click();
+        cy.contains('.button', 'Enviar').click();
         cy.get('.error').should('be.visible');
     })
 
@@ -51,16 +51,16 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#email').type('adrieli@gmail.com').should('have.value', 'adrieli@gmail.com').clear().should('have.value', '');
         cy.get('#phone').type('999999999').should('have.value', '999999999').clear().should('have.value', '');
         cy.get('#open-text-area').type('Teste').should('have.value', 'Teste').clear().should('have.value', '');
-        cy.get('.button[type="submit"]').click();
+        cy.contains('.button', 'Enviar').click();
         cy.get('.error').should('be.visible');
     })
 
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function() {
-        cy.get('.button[type="submit"]').click();
+        cy.contains('.button', 'Enviar').click();
         cy.get('.error').should('be.visible');
     })
 
-    it.only('envia o formuário com sucesso usando um comando customizado', function() {
+    it('envia o formuário com sucesso usando um comando customizado', function() {
         cy.fillMandatoryFieldsAndSubmit('Adrieli', 'Santos', 'adrieli@gmail.com', '999999999', 'Teste');
         cy.get('.success').should('be.visible');
     })
