@@ -138,7 +138,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.contains('Talking About Test').should('be.visible');
     })
 
-    it.only('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
+    it('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
         cy.get('.success')
           .should('not.be.visible')
           .invoke('show')
@@ -153,6 +153,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
           .and('contain', 'Valide os campos obrigatórios!')
           .invoke('hide')
           .should('not.be.visible')
+      })
+
+      it.only('preenche a area de texto usando o comando invoke', function() {
+        const longText = Cypress._.repeat('0123456789', 20)
+        cy.get('#open-text-area').invoke('val', longText).should('have.value', longText)
       })
 
   })
