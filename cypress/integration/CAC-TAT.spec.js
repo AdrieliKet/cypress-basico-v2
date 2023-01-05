@@ -40,7 +40,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
     Cypress._.times(3, function() {
-        it.only('campo telefone continua vazio quando preenchido com valor não-numérico', function() {
+        it('campo telefone continua vazio quando preenchido com valor não-numérico', function() {
             cy.get('#phone').type('abc').should('have.value', '')
         })
     })
@@ -137,5 +137,22 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#privacy a').invoke('removeAttr', 'target').click();
         cy.contains('Talking About Test').should('be.visible');
     })
+
+    it.only('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
+        cy.get('.success')
+          .should('not.be.visible')
+          .invoke('show')
+          .should('be.visible')
+          .and('contain', 'Mensagem enviada com sucesso.')
+          .invoke('hide')
+          .should('not.be.visible')
+        cy.get('.error')
+          .should('not.be.visible')
+          .invoke('show')
+          .should('be.visible')
+          .and('contain', 'Valide os campos obrigatórios!')
+          .invoke('hide')
+          .should('not.be.visible')
+      })
 
   })
