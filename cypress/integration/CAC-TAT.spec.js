@@ -9,7 +9,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT');
     })
 
-    it.only('preenche os campos obrigatórios e envia o formulário', function() {
+    it('preenche os campos obrigatórios e envia o formulário', function() {
         const longText = 'Teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste'
         cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT');
         cy.get('#firstName').type('Adrieli');
@@ -21,7 +21,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('.success').should('be.visible');
     })
 
-    it.only('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function() {
+    it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function() {
         cy.get('#firstName').type('Adrieli');
         cy.get('#lastName').type('Santos');
         cy.get('#email').type('adrieli.gmail.com');
@@ -29,5 +29,9 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#open-text-area').type('Teste');
         cy.get('.button[type="submit"]').click();
         cy.get('.error').should('be.visible');
+    })
+
+    it.only('campo telefone continua vazio quando preenchido com valor não-numérico', function() {
+        cy.get('#phone').type('abc').should('have.value', '')
     })
   })
